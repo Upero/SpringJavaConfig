@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	
+	<!-- <import resource=""/>" -->
+	<context:annotation-config/>
+	<context:component-scan base-package="DI_test"/>
+	<!-- 
+	<bean id="user" class="DI_test.User" p:name="zuochao" p:title="SpringWar"/>
+	 -->
+<!--
+ 	<bean id="user" class="DI_test.User">
+		<property name="name" value="zuochao"/>
+		<property name="title" value="SpringWar"/>
+	</bean>
+ -->	
+ 
+ <!-- 
+ 	<bean id="user" class="DI_test.User" p:name="zuochao" p:title="SpringWar">
+ 		<constructor-arg name="age" value="15"/>
+ 	</bean>
+  -->	
+ 	
+ 		<!--	若没有p:name 则@Value注解生效  --> 
+ 		<!--
+ 			 使用C命名空间进行构造器注入，
+ 			若构造器中为Cat对象 c:cat-ref="cat的id" 
+ 			cat:为构造器中参数名称
+ 		 	-ref 是一个命名约定，对告诉Spring是一个引用对象
+ 		  -->
+ 				
+ 		<!--	
+ 			 c:age="15"   age为参数名称
+ 		 	 c:_0="15"		_0是指参数列表中的位置
+ 		 	 c:_="15"		构造器中参数只有一个可以省略0
+ 		-->
+  	<bean id="user" class="DI_test.User" p:name="zuochao" p:title="SpringWar" c:_="15" p:cat-ref="cat"/>
+  		<!-- <constructor-arg name="age" value="15"/> -->	
+  		<!-- <property name="cat" ref="cat"/> -->
+  	<!-- </bean> -->
+  	<bean id="cat" class="DI_test.Cat"/>
+  
+</beans>

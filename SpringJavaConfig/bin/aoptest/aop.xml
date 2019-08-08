@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<aop:aspectj-autoproxy proxy-target-class="true"/> 
+	<bean class="aoptest.Audience" id="audience"/>
+	<bean class="aoptest.PerformanceImpl" id="performanceImpl"/>
+	<aop:config>
+		<aop:aspect ref="audience">
+			<aop:pointcut expression="execution(** aoptest.Performance+.perform())" id="performance"/>
+			<aop:before method="silenceCellPhones" pointcut-ref="performance"/>
+			<aop:after method="applause" pointcut-ref="performance"/>
+		</aop:aspect>
+	</aop:config>
+  
+</beans>
